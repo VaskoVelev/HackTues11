@@ -1,63 +1,86 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from models.user import User
-from utils.auth import authenticate_user
-from database.db_manager import get_db
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+app.secret_key = 'your_secret_key_here'  # Secret key for session management
 
+# Dummy database (In-memory for demonstration)
+users_db = {
+    'boyan': {
+        'password': generate_password_hash("hacking_tues")
+    }
+}
 
-# --- Home Route ---
+# Home route (shows the home page)
 @app.route('/')
 def home():
-    if 'user' in session:
-        return render_template('index.html', username=session['user'])
-    return redirect('/login')
+    return render_template('index.html')
 
+@app.route('/finance')
+def finance():
+    return render_template('finance.html')
 
-# --- Login Route ---
+@app.route('/health')
+def health():
+    return render_template('health.html')
+
+@app.route('/time')
+def time():
+    return render_template('time.html')
+
+# Login route (GET: show login form, POST: handle login)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
-        if authenticate_user(username, password):
-            session['user'] = username
-            return redirect('/')
+        login_action = request.form['login-action']
+        if login_action == 'register':
+            return redirect('/register')
+        
+        # Check if user exists in the database
+        if username in users_db:
+            # Compare entered password with stored hashed password
+            if check_password_hash(users_db[username]['password'], password):
+                session['username'] = username
+                flash('Login successful!', 'success')
+                return redirect(url_for('home'))
+            else:
+                flash('Invalid password. Please try again.', 'danger')
         else:
-            return "Invalid credentials. Try again!"
+            flash('Username not found. Please register first.', 'danger')
+    
+    return render_template('index.html', route='/login')
 
-    return render_template('login.html')
+# Registration route (GET: show registration form, POST: handle registration)
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # Check if user already exists
+        if username in users_db:
+            flash('Username already taken. Please choose a different one.', 'danger')
+            return redirect(url_for('register'))
+        
+        # Hash the password before storing it
+        hashed_password = generate_password_hash(password)
+        
+        # Store the new user in the "database"
+        users_db[username] = {'password': hashed_password}
+        flash('Registration successful! Please log in now.', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('register.html')
 
-
-# --- Signup Route ---
-@app.route('/signup', methods=['POST'])
-def signup():
-    username = request.form['username']
-    password = request.form['password']
-
-    user = User(username=username, password=password)
-    user.save()
-
-    session['user'] = username
-    return redirect('/')
-
-
-# --- Logout Route ---
+# Logout route (logs out the user)
 @app.route('/logout')
 def logout():
-    session.pop('user', None)
-    return redirect('/login')
+    session.pop('username', None)
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('home'))
 
-
-# --- Download Route ---
-@app.route('/download')
-def download_game():
-    if 'user' in session:
-        return redirect('/static/game.zip')
-    return redirect('/login')
-
-
-if __name__ == "__main__":
+# Run the Flask app
+if __name__ == '__main__':
     app.run(debug=True)

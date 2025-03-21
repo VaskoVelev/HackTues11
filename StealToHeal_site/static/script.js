@@ -1,3 +1,4 @@
+// Show a specific section
 function showSection(sectionId) {
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
@@ -10,12 +11,18 @@ function showSection(sectionId) {
     }
 }
 
+// Default to showing 'HOME' on page load
 document.addEventListener('DOMContentLoaded', () => {
-    showSection('HOME');
+    if (route == '/login') {
+        showSection('loginSection');
+    } else {
+        showSection('HOME');
+    }
+        
+    setTimeout(() => document.getElementById('flash-message').classList.add('hidden'), 7000);
 });
 
-
-
+// Download Game
 function downloadGame() {
     const downloadLink = document.createElement('a');
     downloadLink.href = 'game.zip'; 
@@ -23,22 +30,54 @@ function downloadGame() {
     downloadLink.click();
 }
 
-
-
+// Handle user inactivity (security feature)
 let userIsHuman = false;
-
 window.addEventListener('mousemove', () => userIsHuman = true);
 window.addEventListener('keydown', () => userIsHuman = true);
 
-setTimeout(() => {
-    if (!userIsHuman) {
-        sessionStorage.setItem('accessDenied', 'true');
-        location.reload();
-    }
-}, 5000);
-
-if (sessionStorage.getItem('accessDenied') === 'true') {
-    document.body.innerHTML = '<h1 class="access-denied">Access Denied</h1>';
-    sessionStorage.removeItem('accessDenied');
+// Login Functionality
+function showLoginPopup() {
+    showSection('loginSection');
 }
+
+// Login user
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Check credentials (for demo purposes, hardcoded)
+    if (username === 'user' && password === 'password123') {
+        localStorage.setItem('loggedIn', 'true');
+        showSection('HOME');  // Return to HOME page
+        alert('Login successful!');
+    } else {
+        document.getElementById('loginError').textContent = 'Invalid credentials, please try again.';
+    }
+}
+
+// Register user (for demo purposes)
+function register() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Simulate user registration (store data in local storage, for demo purposes)
+    localStorage.setItem('user_' + username, password);
+    alert('Registration successful! Please log in now.');
+}
+
+// Logout functionality
+function logout() {
+    localStorage.removeItem('loggedIn');
+    alert('Logged out successfully!');
+    showSection('HOME'); // Go back to HOME
+}
+
+// Check if user is logged in and show relevant UI
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('loggedIn') === 'true') {
+        document.querySelector('nav button:last-child').style.display = 'inline'; // Show Logout button
+    }
+});
+
+
 
