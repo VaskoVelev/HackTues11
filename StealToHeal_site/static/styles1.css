@@ -122,13 +122,14 @@ p {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top center;
-    min-height: 1000px;
+    min-height: 650px;
+    filter: brightness(50%);
 }
 
 .home-image {
     width: 80%;
     max-width: 600px;
-    margin: 20px 0;
+    margin-top: 20px;
 }
 
 .download-btn {
