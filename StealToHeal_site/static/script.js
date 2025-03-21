@@ -13,13 +13,15 @@ function showSection(sectionId) {
 
 // Default to showing 'HOME' on page load
 document.addEventListener('DOMContentLoaded', () => {
-    if (route == '/login') {
+    if (typeof route != 'undefined' && route == '/login') {
         showSection('loginSection');
+    } else if (typeof route != 'undefined' && route == '/register') {
+        showSection('registerSection');
     } else {
         showSection('HOME');
     }
         
-    setTimeout(() => document.getElementById('flash-message').classList.add('hidden'), 7000);
+    setTimeout(() => document.getElementById('flash-message')?.classList?.add('hidden'), 7000);
 });
 
 // Download Game
@@ -67,9 +69,7 @@ function register() {
 
 // Logout functionality
 function logout() {
-    localStorage.removeItem('loggedIn');
-    alert('Logged out successfully!');
-    showSection('HOME'); // Go back to HOME
+    window.location.href = '/logout';
 }
 
 // Check if user is logged in and show relevant UI

@@ -15,6 +15,7 @@ html, body {
     height: 100%;
     width: 100%;
     overflow-x: hidden; 
+    overflow-y: scroll;
 }
 
 header {
@@ -36,7 +37,7 @@ header {
 
 .logo img {
     height: 75px;
-    margin-left:-250px;
+    margin-left:-100px;
 }
 
 nav button {
@@ -49,6 +50,20 @@ nav button {
     padding: 10px 20px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+nav a  {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f5f5f5;
+    background: transparent;
+    border: 2px solid #f1c40f;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
 }
 
 nav button:hover {
@@ -187,3 +202,8 @@ p {
     background-color: #45a049;
 }
 
+
+.logo1 img {
+    height: 75px;
+    margin-left:-370px;
+}

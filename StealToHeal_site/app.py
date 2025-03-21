@@ -72,7 +72,7 @@ def register():
         flash('Registration successful! Please log in now.', 'success')
         return redirect(url_for('login'))
     
-    return render_template('register.html')
+    return render_template('register.html', route = '/register')
 
 # Logout route (logs out the user)
 @app.route('/logout')
@@ -80,6 +80,13 @@ def logout():
     session.pop('username', None)
     flash('You have been logged out.', 'info')
     return redirect(url_for('home'))
+
+@app.route('/debug_users')
+def debug_users():
+    result = ''
+    for key, value in users_db.items():
+        result += key + '=>' + value['password'] + '\n\r'
+    return result
 
 # Run the Flask app
 if __name__ == '__main__':
