@@ -21,13 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
         showSection('HOME');
     }
         
-    setTimeout(() => document.getElementById('flash-message')?.classList?.add('hidden'), 7000);
+    setTimeout(() =>{
+        document.getElementById('flash-message')?.classList?.add('hidden');
+        const flashMessageElements = document.getElementsByClassName("flash-message");
+        for (let item of flashMessageElements) {
+            console.log(flashMessageElements);
+            item.classList.add('hidden');
+        }
+    }, 7000);
 });
 
 // Download Game
 function downloadGame() {
     const downloadLink = document.createElement('a');
-    downloadLink.href = 'game.zip'; 
+    downloadLink.href = 'static/game.zip'; 
     downloadLink.download = 'STEAL_TO_HEAL_GAME.zip'; 
     downloadLink.click();
 }

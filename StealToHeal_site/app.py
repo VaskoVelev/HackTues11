@@ -14,19 +14,19 @@ users_db = {
 # Home route (shows the home page)
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', username=session.get('username') or '')
 
 @app.route('/finance')
 def finance():
-    return render_template('finance.html')
+    return render_template('finance.html', username=session.get('username') or '')
 
 @app.route('/health')
 def health():
-    return render_template('health.html')
+    return render_template('health.html', username=session.get('username') or '')
 
 @app.route('/time')
 def time():
-    return render_template('time.html')
+    return render_template('time.html', username=session.get('username') or '')
 
 # Login route (GET: show login form, POST: handle login)
 @app.route('/login', methods=['GET', 'POST'])

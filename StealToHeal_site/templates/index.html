@@ -18,43 +18,51 @@
         <div class="logo">
             <img src="static/11.jpg" alt="Logo">
         </div>
+        {% if username %}
+        <div>
+            <b>Welcome {{username}}</b>
+        </div>
+        {% endif %}
         <nav>
             <button onclick="showSection('HOME')"><b>HOME</b></button>
             <button onclick="showSection('how_to_play')"><b>HOW TO PLAY</b></button>
             <button onclick="showSection('BETTER LIFE')"><b>BETTER LIFE</b></button>
             <button onclick="showSection('CONTACT')"><b>CONTACT</b></button>
-            <button onclick="showLoginPopup()"><b>Login</b></button>
+            {% if username %}
             <button onclick="logout()"><b>Logout</b></button>
+            {% else %}
+            <button onclick="showLoginPopup()"><b>Login</b></button> 
+            {% endif %}
         </nav>
     </header>
-    <div id="flash-message">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="flash-messages">
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% endwith %}
-    </div>
     <hr>
+    
     <main>
         <section id="HOME" class="hidden">
             <div class="h2-container">
                 <h2>HOME</h2>
             </div>
+            <div class="flash-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
+            </div>
             <div class="home-content">
                 <p>Here is a video demonstration of how to play and all the varieties of mechanics in the game.</p>
                 <p>Watch the video below to learn how to play the game and get a head start on your journey to success!</p>
+                {% if username %}
                 <div class="button1">
                     <button class="download-btn" onclick="downloadGame()">Download Game</button>
                 </div>
-                    <a href="static/11.jpg" onclick="openFullScreen(event, this)">
-                    <img src="static/11.jpg" alt="Game Image" class="home-image">
-                    </a>
+                {% endif %}
             </div>
         </section>
         <section id="how_to_play" class="hidden">
@@ -75,7 +83,7 @@
                 <h2>BETTER LIFE</h2>
             </div>
             <p>Homeless people don't have good live. Here you can learn more about how to make your life better.</p>
-            <div>    
+            <div class="better_life_buttons">    
                 <a href="finance" class="newdownload-btn">FINANCE</a>
                 <a href="health" class="newdownload-btn">HEALTH</a>
                 <a href="time" class="newdownload-btn">TIME</a>
@@ -97,6 +105,19 @@
         <section id="loginSection" class="hidden">
             <div class="h2-container">
                 <h2>Login / Register</h2>
+            </div>
+            <div class="flash-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
             </div>
             <div class="login-form">
                 <form method="POST" action="/login">
