@@ -40,7 +40,6 @@
         </nav>
     </header>
     <hr>
-    
     <main>
         <section id="HOME" class="hidden">
             <div class="h2-container">
@@ -60,9 +59,13 @@
                 {% endwith %}
             </div>
             <div class="home-content">
-               {% if username %}
+                {% if username %}
                 <div class="button1">
                     <button class="download-btn" onclick="downloadGame()">Download Game</button>
+                </div>
+                {% else%}
+                <div class="button1">
+                    <button class="download-btn" onclick="errordownload()">Download Game</button>
                 </div>
                 {% endif %}
             </div>
@@ -73,7 +76,7 @@
             </div>
             <p>Welcome to our game where you can learn strategizing, budgeting, business, economics, and time planning.This is a single-player game which is representing the road to glory from a simple homeless man to a multimillionaire.It is a game where you can learn how to manage your money, time, and resources. You will have to make decisions that will affect your future.Here you can watch a video of gameplay.</p>
                 <div class="video">
-                    <iframe width="640" height="360" src="https://www.youtube.com/embed/uIbKh9avmgo" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="640" height="360" src="https://www.youtube.com/embed/wme7K0r0Hss" frameborder="0" allowfullscreen></iframe>
                 </div>
         </section>
         <section id="BETTER LIFE" class="hidden">
