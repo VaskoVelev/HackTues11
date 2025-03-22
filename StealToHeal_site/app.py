@@ -6,7 +6,7 @@ app.secret_key = 'your_secret_key_here'  # Secret key for session management
 
 # Dummy database (In-memory for demonstration)
 users_db = {
-    '1': {
+    'tuesar': {
         'password': generate_password_hash("hacking_tues")
     }
 }
@@ -79,6 +79,11 @@ def register():
 def logout():
     session.pop('username', None)
     flash('You have been logged out.', 'info')
+    return redirect(url_for('home'))
+
+@app.route('/errordownload')
+def errordownload():
+    flash('You need to log in first.', 'info')
     return redirect(url_for('home'))
 
 @app.route('/debug_users')

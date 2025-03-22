@@ -17,14 +17,14 @@
         </div>
         {% if username %}
         <div class="logo">
-            <img src="static/11.jpg" alt="Logo">
+            <img src="static/homeless.jpg" alt="Logo">
         </div>
         <div class="welcomeuser">
             <b>Welcome {{username}}</b>
         </div>
         {% else %}
         <div class="logo_1">
-            <img src="static/11.jpg" alt="Logo">
+            <img src="static/homeless.jpg" alt="Logo">
         </div>
         {% endif %}
         <nav>
@@ -40,7 +40,6 @@
         </nav>
     </header>
     <hr>
-    
     <main>
         <section id="HOME" class="hidden">
             <div class="h2-container">
@@ -60,11 +59,13 @@
                 {% endwith %}
             </div>
             <div class="home-content">
-                <p>Here is a video demonstration of how to play and all the varieties of mechanics in the game.</p>
-                <p>Watch the video below to learn how to play the game and get a head start on your journey to success!</p>
                 {% if username %}
                 <div class="button1">
                     <button class="download-btn" onclick="downloadGame()">Download Game</button>
+                </div>
+                {% else%}
+                <div class="button1">
+                    <button class="download-btn" onclick="errordownload()">Download Game</button>
                 </div>
                 {% endif %}
             </div>
@@ -73,13 +74,9 @@
             <div class="h2-container">
                 <h2>HOW TO PLAY</h2>
             </div>
-            <p>Welcome to our game where you can learn strategizing, budgeting, business, economics, and time planning.</p>
-            <p>This is a single-player game which is representing the road to glory from a simple homeless man to a multimillionaire.</p>
-            <p>It is a game where you can learn how to manage your money, time, and resources. You will have to make decisions that will affect your future.</p>
-            <p>Are you ready to take the challenge?</p>
-            <p><b>Download the game and start your journey to success!</b></p>
+            <p>Welcome to our game where you can learn strategizing, budgeting, business, economics, and time planning.This is a single-player game which is representing the road to glory from a simple homeless man to a multimillionaire.It is a game where you can learn how to manage your money, time, and resources. You will have to make decisions that will affect your future.Here you can watch a video of gameplay.</p>
                 <div class="video">
-                    <iframe width="640" height="360" src="https://www.youtube.com/embed/uIbKh9avmgo" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="640" height="360" src="https://www.youtube.com/embed/wme7K0r0Hss" frameborder="0" allowfullscreen></iframe>
                 </div>
         </section>
         <section id="BETTER LIFE" class="hidden">
@@ -98,14 +95,10 @@
                 <h2>CONTACT</h2>
             </div>
             <p>Welcome to our game’s contact page! If you have any questions, feedback, or need support, feel free to reach out to us. We’re here to help and ensure you have the best gaming experience possible.</p>
-
             <p>For inquiries, collaborations, or reporting issues, you can contact us at:</p>
-            <p>📧 Email: support@gamename.com</p>
-                
+            <p>📧 Email: support@StealToHeal.com</p>
             <p>We value your input — every suggestion helps us improve and make the game even more exciting. Happy gaming! 🎮✨</p>
         </section>
-
-        <!-- Login Section -->
         <section id="loginSection" class="hidden">
             <div class="h2-container">
                 <h2>Login / Register</h2>
