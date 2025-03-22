@@ -61,11 +61,11 @@
             <div class="home-content">
                 {% if username %}
                 <div class="button1">
-                    <button class="download-btn" onclick="downloadGame()">Download Game</button>
+                    <button class="download-btn" onclick="window.open('https://drive.google.com/drive/folders/1hycNoLO-R80oIpoCa04jS9ghsZqFiWBh', '_blank')">Open Google Drive Folder</button>
                 </div>
                 {% else%}
                 <div class="button1">
-                    <button class="download-btn" onclick="errordownload()">Download Game</button>
+                    <button class="download-btn" onclick="errordownload()">Open Google Drive Folder</button>
                 </div>
                 {% endif %}
             </div>

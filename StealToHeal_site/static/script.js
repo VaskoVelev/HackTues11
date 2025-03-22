@@ -29,13 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
 });
 
-function downloadGame() {
-    const downloadLink = document.createElement('a');
-    downloadLink.href = 'StealToHeal'; 
-    downloadLink.download = 'STEAL_TO_HEAL_GAME.zip'; 
-    downloadLink.click();
-}
-
 let userIsHuman = false;
 window.addEventListener('mousemove', () => userIsHuman = true);
 window.addEventListener('keydown', () => userIsHuman = true);
