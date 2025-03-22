@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEAL TO HEAL</title>
+    <link rel="stylesheet" href="static/styles1.css">
+    <script>
+        route = '{{route}}';
+    </script>
+    <script src="static/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span><b>STEAL TO HEAL</b></span>
+        </div>
+        <div class="logo1">
+            <img src="static/11.jpg" alt="Logo">
+        </div>
+        <nav class="a">
+            <a href="/login">HOME</a>
+        </nav>
+    </header>
+    <hr>
+    <main>
+        <section id="HOME" class="hidden">
+            <div class="h2-container">
+                <h2>HOME</h2>
+            </div>
+            <div class="flash-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="home-content">
+                <p>Here is a video demonstration of how to play and all the varieties of mechanics in the game.</p>
+                <p>Watch the video below to learn how to play the game and get a head start on your journey to success!</p>
+                <div class="button1">
+                    <button class="download-btn" onclick="downloadGame()">Download Game</button>
+                </div>
+                    <a href="static/11.jpg" onclick="openFullScreen(event, this)">
+                    <img src="static/11.jpg" alt="Game Image" class="home-image">
+                    </a>
+            </div>
+        </section>
+        <section id="registerSection" class="hidden">
+            <div class="h2-container">
+                <h2>Login / Register</h2>
+            </div>
+            <div class="flash-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="login-form">
+                <form method="POST" action="/register">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit" name="login-action" value="register">Register</button>
+                    <p id="loginError" class="error-message"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

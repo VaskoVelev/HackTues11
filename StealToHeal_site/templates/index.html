@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEAL TO HEAL</title>
+    <link rel="stylesheet" href="static/styles1.css">
+    <script>
+        route = '{{route}}';
+    </script>
+    <script src="static/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span><b>STEAL TO HEAL</b></span>
+        </div>
+        {% if username %}
+        <div class="logo">
+            <img src="static/11.jpg" alt="Logo">
+        </div>
+        <div class="welcomeuser">
+            <b>Welcome {{username}}</b>
+        </div>
+        {% else %}
+        <div class="logo_1">
+            <img src="static/11.jpg" alt="Logo">
+        </div>
+        {% endif %}
+        <nav>
+            <button onclick="showSection('HOME')"><b>HOME</b></button>
+            <button onclick="showSection('how_to_play')"><b>HOW TO PLAY</b></button>
+            <button onclick="showSection('BETTER LIFE')"><b>BETTER LIFE</b></button>
+            <button onclick="showSection('CONTACT')"><b>CONTACT</b></button>
+            {% if username %}
+            <button onclick="logout()"><b>Logout</b></button>
+            {% else %}
+            <button onclick="showLoginPopup()"><b>Login</b></button> 
+            {% endif %}
+        </nav>
+    </header>
+    <hr>
+    
+    <main>
+        <section id="HOME" class="hidden">
+            <div class="h2-container">
+                <h2>HOME</h2>
+            </div>
+            <div class="flash-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="home-content">
+                <p>Here is a video demonstration of how to play and all the varieties of mechanics in the game.</p>
+                <p>Watch the video below to learn how to play the game and get a head start on your journey to success!</p>
+                {% if username %}
+                <div class="button1">
+                    <button class="download-btn" onclick="downloadGame()">Download Game</button>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        <section id="how_to_play" class="hidden">
+            <div class="h2-container">
+                <h2>HOW TO PLAY</h2>
+            </div>
+            <p>Welcome to our game where you can learn strategizing, budgeting, business, economics, and time planning.</p>
+            <p>This is a single-player game which is representing the road to glory from a simple homeless man to a multimillionaire.</p>
+            <p>It is a game where you can learn how to manage your money, time, and resources. You will have to make decisions that will affect your future.</p>
+            <p>Are you ready to take the challenge?</p>
+            <p><b>Download the game and start your journey to success!</b></p>
+                <div class="video">
+                    <iframe width="640" height="360" src="https://www.youtube.com/embed/uIbKh9avmgo" frameborder="0" allowfullscreen></iframe>
+                </div>
+        </section>
+        <section id="BETTER LIFE" class="hidden">
+            <div class="h2-container">
+                <h2>BETTER LIFE</h2>
+            </div>
+            <p>Homeless people don't have good live. Here you can learn more about how to make your life better.</p>
+            <div class="better_life_buttons">    
+                <a href="finance" class="newdownload-btn">FINANCE</a>
+                <a href="health" class="newdownload-btn">HEALTH</a>
+                <a href="time" class="newdownload-btn">TIME</a>
+            </div>    
+        </section>
+        <section id="CONTACT" class="hidden">
+            <div class="h2-container">
+                <h2>CONTACT</h2>
+            </div>
+            <p>Welcome to our game’s contact page! If you have any questions, feedback, or need support, feel free to reach out to us. We’re here to help and ensure you have the best gaming experience possible.</p>
+
+            <p>For inquiries, collaborations, or reporting issues, you can contact us at:</p>
+            <p>📧 Email: support@gamename.com</p>
+                
+            <p>We value your input — every suggestion helps us improve and make the game even more exciting. Happy gaming! 🎮✨</p>
+        </section>
+
+        <!-- Login Section -->
+        <section id="loginSection" class="hidden">
+            <div class="h2-container">
+                <h2>Login / Register</h2>
+            </div>
+            <div class="flash-message">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="login-form">
+                <form method="POST" action="/login">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit" name="login-action" value="login">Login</button>
+                    <button type="submit" name="login-action" value="register">Register</button>
+                    <p id="loginError" class="error-message"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
