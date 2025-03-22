@@ -83,7 +83,7 @@ def logout():
 
 @app.route('/errordownload')
 def errordownload():
-    flash('You need to sing up first.', 'info')
+    flash('You need to log in first.', 'info')
     return redirect(url_for('home'))
 
 @app.route('/debug_users')
