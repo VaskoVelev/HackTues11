@@ -122,7 +122,7 @@ p {
 
 .home-content {
     text-align: center;
-    background-image: url(/static/11.jpg);
+    background-image: url(/static/homeless.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top center;
@@ -148,6 +148,7 @@ p {
     transition: background 0.3s;
     margin: 20px 0;
     text-decoration: none;
+    margin-top: 550px;
 }
 
 .download-btn:hover {
