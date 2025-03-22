@@ -6,7 +6,7 @@ app.secret_key = 'your_secret_key_here'  # Secret key for session management
 
 # Dummy database (In-memory for demonstration)
 users_db = {
-    'boyan': {
+    '1': {
         'password': generate_password_hash("hacking_tues")
     }
 }

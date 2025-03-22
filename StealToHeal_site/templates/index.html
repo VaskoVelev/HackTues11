@@ -15,12 +15,16 @@
         <div class="logo">
             <span><b>STEAL TO HEAL</b></span>
         </div>
+        {% if username %}
         <div class="logo">
             <img src="static/11.jpg" alt="Logo">
         </div>
-        {% if username %}
-        <div>
+        <div class="welcomeuser">
             <b>Welcome {{username}}</b>
+        </div>
+        {% else %}
+        <div class="logo_1">
+            <img src="static/11.jpg" alt="Logo">
         </div>
         {% endif %}
         <nav>
